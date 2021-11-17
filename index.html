@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+
+<html lang="fr">
+
+<head>
+
+    <title>Reconnaissance faciale</title>
+
+    <meta charset="UTF-8">
+    <meta HTTP-EQUIV="content-language" content="FR">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="revisit-after" content="7 days">
+    <meta name="robots" content="all">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" action="traitement.php">
+            <div class="form-group">
+                <label for="image">Image à scanner</label>
+                <input type="file" class="form-control-file" name="image" id="image" accept="image/jpeg" required>
+            </div>
+
+            <button type="submit" class="btn btn-danger">Scanner</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
