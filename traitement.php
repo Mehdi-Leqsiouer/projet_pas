@@ -1,13 +1,13 @@
 <?php
 
-
+    // GOOGLE
     use Google\Cloud\Vision\VisionClient;
 
 
     // On chage composer
     require_once 'vendor/autoload.php';
 
-
+	
     // On récupère l'image à scanner
     $file = $_FILES["image"];
 
@@ -33,6 +33,7 @@
     // On parcourt les visages trouvés
     // Et comme nous allons écrire sur l'image, nous devons en créer une nouvelle
     $output = imagecreatefromjpeg(__DIR__ . "/export/image.jpg");
+	$red = imagecolorallocate($output, 255, 0, 0);
 
     foreach ($annotation->faces() as $face) {
         $vertices = $face->boundingPoly()['vertices'];
@@ -42,11 +43,18 @@
         $x2 = $vertices[2]['x'];
         $y2 = $vertices[2]['y'];
 
-        imagerectangle($output, $x1, $y1, $x2, $y2, 0x00ff00);
+        imagerectangle($output, $x1, $y1, $x2, $y2, $red);
     }
 
 
     // Affichage de l'image à l'utilisateur
-    header('Content-Type: image/jpeg');
-    imagejpeg($output);
-    imagedestroy($output);
+	//file_put_contents("image_ggl.jpg",file_get_contents($output));
+	imagejpeg($output,__DIR__ . "/export/image_ggl.jpg");
+    header('Location: comparatif.html');
+	
+	
+	
+	//TODO AMAZON + OPENSOURCE php
+    
+	//imagedestroy($output);
+    ?>

@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(isset($_SESSION["prenom"])) {
-		header("Location: distance.php");
+		header("Location: menu.html");
 	}
 ?>
 
