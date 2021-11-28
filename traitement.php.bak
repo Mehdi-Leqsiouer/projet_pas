@@ -1,22 +1,5 @@
 <?php
 
-		
-	$file = $_FILES["image"];
-	
-	#var_dump($file);
-	#$file_path = $file['tmp_name'];
-	
-	move_uploaded_file($file['tmp_name'], __DIR__ . "/export/video.mov");
-	
-	$file_moved = "/export/video.mov";
-	
-	$output = passthru("python sentiment_analysis.py $file_moved");
-	echo $output;
-
-	#header('Location: comparatif.html');
-
-
-/*
     // GOOGLE
     use Google\Cloud\Vision\VisionClient;
 
@@ -74,5 +57,4 @@
 	//TODO AMAZON + OPENSOURCE php
     
 	//imagedestroy($output);
-	*/
     ?>

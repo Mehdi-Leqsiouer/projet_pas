@@ -22,7 +22,7 @@
         <form method="post" enctype="multipart/form-data" action="traitement.php">
             <div class="form-group">
                 <label for="image">Vidéo à scanner</label>
-                <input type="file" class="form-control-file" name="image" id="image" accept="video/mov" required>
+                <input type="file" class="form-control-file" name="image" id="image" accept="video/jpeg" required>
             </div>
 
             <button type="submit" class="btn btn-danger">Scanner</button>
