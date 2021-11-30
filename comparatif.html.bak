@@ -22,7 +22,7 @@
         <hr>
 
         <div class="col-md-4 col-md-pull-4 ">
-            <video width="1000" height="540"  src = "annotated_video.mp4" controls>
+            <video width="520" height="540"  src = "annotated_video.mp4" controls>
 				Navigateur incompatible
 			</video>
         </div>

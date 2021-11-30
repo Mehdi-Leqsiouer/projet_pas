@@ -1,20 +1,29 @@
 <?php
-
+	
+	
+	
+	
+	ini_set('max_execution_time', 0);
 		
 	$file = $_FILES["image"];
+	#$file = $_POST["image"];
+	
+	
 	
 	#var_dump($file);
 	#$file_path = $file['tmp_name'];
 	
 	move_uploaded_file($file['tmp_name'], __DIR__ . "/export/video.mov");
 	
-	$file_moved = "/export/video.mov";
+	$file_moved = "./export/video.mov";
 	
 	$output = passthru("python sentiment_analysis.py $file_moved");
-	echo $output;
+	#echo $output;
 
 	#header('Location: comparatif.html');
-
+	echo "ok";
+	exit();
+	
 
 /*
     // GOOGLE

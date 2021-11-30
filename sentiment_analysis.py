@@ -11,7 +11,7 @@
 
 
 import cv2
-import os
+import os, shutil
 import csv
 import boto3
 import io
@@ -147,7 +147,7 @@ framesDirectory=r"./video_frames/"
 credentialsFile=r"new_user_credentials.csv"
 annotatedImagesDir=r"./annotated_images/"
 access_key_id, secret_access_key, aws_region = getAWSRekognitionCredentials(credentialsFile)
-annotatedVideo=r"annotated_video.avi"
+annotatedVideo=r"annotated_video.mp4"
 
 nb_frames=extractFramesFromVideo(videoFile,framesDirectory)
 #print("\n" + str(nb_frames) + " frames has been extracted from " + videoFile + " file.")
@@ -156,4 +156,29 @@ nb_annotated_images=show_faces_and_emotions(framesDirectory, annotatedImagesDir)
 #print("\n" + str(nb_annotated_images) + " images has been annotated.")
 
 createVideoFromFrames(annotatedImagesDir, annotatedVideo)
+
+if os.path.exists("r./export/video.mov"):
+    os.remove(r"./export/video.mov")
+
+
+for filename in os.listdir(framesDirectory):
+    file_path = os.path.join(framesDirectory, filename)
+    try:
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    except Exception as e:
+        print('Failed to delete %s. Reason: %s' % (file_path, e))
+        
+for filename in os.listdir(annotatedImagesDir):
+    file_path = os.path.join(annotatedImagesDir, filename)
+    try:
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    except Exception as e:
+        print('Failed to delete %s. Reason: %s' % (file_path, e))
+    
 
