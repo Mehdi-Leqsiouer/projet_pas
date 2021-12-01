@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 	
+	<link rel="stylesheet" href="css/style_progress.css" crossorigin="anonymous">
+	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
@@ -40,7 +42,12 @@
             <div property="foaf:img" style = "display:none;" id = "loader" name= "loader" class="loader"></div>
             <br>
             </div>
+			
+			<div class="progress" name = "progress1" id = "progress1"></div>
+			<div class="progress" name = "progress2" id = "progress2"></div>
     </div>
+	
+	
 	
 	<script>
               $(document).ready(function() {
@@ -67,20 +74,53 @@
                           'image'              : "test"
                       };
 					  
-                     // console.log(data);
+                      console.log(dataappend);
                       // process the form
-                      $.ajax({
+                      /*$.ajax({
                           type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
                           url         : 'traitement.php', // the url where we want to POST
                           data        : dataappend,
 						  contentType: false,
                           processData: false // our data object
-                      })
+                      })*/
+					  $.ajax({
+						xhr: function () {
+							var xhr = new window.XMLHttpRequest();
+							xhr.upload.addEventListener("progress", function (evt) {
+								if (evt.lengthComputable) {
+									var percentComplete = evt.loaded / evt.total;
+									console.log(percentComplete);
+									$('.progress1').css({
+										width: percentComplete * 100 + '%'
+									});
+									if (percentComplete === 1) {
+										$('.progress1').addClass('hide');
+									}
+								}
+							}, false);
+							xhr.addEventListener("progress", function (evt) {
+								if (evt.lengthComputable) {
+									var percentComplete = evt.loaded / evt.total;
+									console.log(percentComplete);
+									$('.progress2').css({
+										width: percentComplete * 100 + '%'
+									});
+								}
+							}, false);
+							return xhr;
+						},
+						url: "traitement.php",
+						type: "POST",
+						data:  new FormData(this),
+						contentType: false,
+						cache: false,
+						processData: false       
+					})
                           // using the done promise callback
                           .done(function(data) {
-							console.log(data);
-							$("#loader").hide();
-								//document.location.href="comparatif.html"; 
+								console.log(data);
+								$("#loader").hide();
+								document.location.href="comparatif.html"; 
                               // here we will handle errors and validation messages
                           }).fail(function() {
                           alert("erreur");

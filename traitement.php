@@ -10,7 +10,7 @@
 	
 	
 	
-	#var_dump($file);
+	var_dump($_FILES);
 	#$file_path = $file['tmp_name'];
 	
 	move_uploaded_file($file['tmp_name'], __DIR__ . "/export/video.mov");
@@ -18,7 +18,7 @@
 	$file_moved = "./export/video.mov";
 	
 	$output = passthru("python sentiment_analysis.py $file_moved");
-	#echo $output;
+	echo $output;
 
 	#header('Location: comparatif.html');
 	echo "ok";
