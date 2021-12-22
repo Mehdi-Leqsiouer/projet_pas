@@ -59,8 +59,8 @@ def getAWSRekognitionCredentials(csvFile):
         next(input)
         reader = csv.reader(input)
         for line in reader:
-            access_key_id = line[2]
-            secret_access_key = line[3]
+            access_key_id = line[0]
+            secret_access_key = line[1]
             
     aws_region = 'us-east-2'
     return access_key_id, secret_access_key, aws_region
@@ -144,7 +144,7 @@ videoFile = sys.argv[1]
 print(videoFile)
 #videoFile=r"CT028.mov"
 framesDirectory=r"./video_frames/"
-credentialsFile=r"new_user_credentials.csv"
+credentialsFile=r"Administrator_accessKeys.csv"
 annotatedImagesDir=r"./annotated_images/"
 access_key_id, secret_access_key, aws_region = getAWSRekognitionCredentials(credentialsFile)
 annotatedVideo=r"annotated_video.mp4"
